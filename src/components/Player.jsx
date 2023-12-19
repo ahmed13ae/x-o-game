@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Player({ name, symbol }) {
+export default function Player({ name, symbol,isActive }) {
   const [editMode, setEditMode] = useState(false);
   const [newName, setNewName] = useState(name);
   const handleMode = () => {
@@ -16,7 +16,7 @@ export default function Player({ name, symbol }) {
     setEditMode(false);
   };
   return (
-    <li>
+    <li className={isActive?"active":''}>
       <span className="player">
         {!editMode ? (
           <span className="player-name">{newName}</span>

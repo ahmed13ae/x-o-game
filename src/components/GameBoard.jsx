@@ -6,21 +6,21 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard({onSelectBox,playerSymbol}) {
-    const[gameBoard,setGameBoard]=useState(initialGameBoard)
-    function handleBoxClick(rowIndex,cellIndex){     
-        setGameBoard((prevGameBoard)=>{
-           const newGameBoard=[...prevGameBoard.map(row=>[...row])];
-           console.log(playerSymbol);
-            newGameBoard[rowIndex][cellIndex]=playerSymbol;
-            return newGameBoard;
-        })
-        onSelectBox();
-    }
+export default function GameBoard({onSelectBox,turns}) {
+  let gameBoard=initialGameBoard;
+  for(const turn of turns){
+    const{square,player}=turn;
+    console.log(square);
+    const{row,col}=square;
+    
+    gameBoard[row][col]=player;
+   
+  }
+    
   return <ol id="game-board">
     {gameBoard.map((row, rowIndex) => <li key={rowIndex}>
         <ol>
-            {row.map((cell, cellIndex) => <button key={cellIndex} onClick={()=>handleBoxClick(rowIndex,cellIndex)}>{cell}</button>)}
+            {row.map((cell, cellIndex) => <button key={cellIndex} onClick={()=>onSelectBox(rowIndex,cellIndex)}>{cell}</button>)}
         </ol>
     </li>)}
   </ol>;
