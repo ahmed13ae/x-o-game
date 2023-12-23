@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Player({ name, symbol,isActive }) {
+export default function Player({ name, symbol,isActive,onChangeName }) {
   const [editMode, setEditMode] = useState(false);
   const [newName, setNewName] = useState(name);
   const handleMode = () => {
@@ -13,6 +13,7 @@ export default function Player({ name, symbol,isActive }) {
   };
   const handleSave = () => {
     setNewName(newName);
+    onChangeName(symbol,newName);
     setEditMode(false);
   };
   return (
